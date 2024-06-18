@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="heb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טופס סיכום שיעורים</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://raw.githubusercontent.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>טופס סיכום שיעורים</h1>
+
+    <button class="accordion">הכנס שם חדש או בחר מרשימת התלמידים</button>
+    <div class="panel">
+        <div class="tooltip">
+            <form id="studentForm">
+                <label for="studentName">שם: </label>
+                <input type="text" id="studentName" name="studentName" required oninput="validateStudentName()">
+                <span class="tooltiptext">הכנס את שם התלמיד\ה</span><br><br>
+                <label for="lessonPrice">תעריף:</label>
+                <input type="number" id="lessonPrice" name="lessonPrice" step="0.01" required oninput="validateLessonPrice()">
+                <span class="tooltiptext">הכנס תעריף</span><br><br>
+                <button type="submit" class="btn">אישור</button>
+            </form>
+        </div>
+    </div>
+
+    <button class="accordion">שמות התלמידים</button>
+    <div class="panel">
+        <table>
+            <thead>
+                <tr>
+                    <th>שם</th>
+                    <th>תעריף</th>
+                    <th>עריכה</th>
+                </tr>
+            </thead>
+            <tbody id="studentsTable">
+                <!-- Students will be added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <button class="accordion">הוספת שיעור</button>
+    <div class="panel">
+        <div class="tooltip">
+            <form id="paymentForm">
+                <label for="student">שם:</label>
+                <select id="student" name="student" required>
+                    <!-- Students will be added here -->
+                </select>
+                <span class="tooltiptext">בחר תלמיד</span><br><br>
+                <label for="date">תאריך:</label>
+                <input type="date" id="date" name="date" required>
+                <button type="button" class="btn" onclick="setToday()">היום</button>
+                <span class="tooltiptext">התאריך בו התבצע שיעור</span><br><br>
+                <button type="submit" class="btn">אישור</button>
+            </form>
+        </div>
+    </div>
+
+    <button class="accordion">סיכום</button>
+    <div class="panel">
+        <table>
+            <thead>
+                <tr>
+                    <th>תלמיד</th>
+                    <th>תאריך</th>
+                    <th>כמות</th>
+                    <th>עריכה</th>
+                    <th>עריכה</th>
+                </tr>
+            </thead>
+            <tbody id="paymentsTable">
+                <!-- Payments will be added here -->
+            </tbody>
+        </table>
+        <button id="clearAllPayments" class="btn">נקה הכל</button>
+        <button id="printPayments" class="btn">הדפס הכל</button>
+    </div>
+
+    <h2>סה"כ: ₪<span id="totalIncome">0.00</span></h2>
+
+    <div>
+        <canvas id="incomeChart" width="400" height="200"></canvas>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
